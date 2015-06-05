@@ -8,26 +8,33 @@ namespace Space_Probe
 {
     class Universe
     {
-        public int row = 25;
-        public int col = 25;
+        public int row = 10;
+        public int col = 10;
         static Random random = new Random();
         public List<KeyValuePair<string, double>> elements = new List<KeyValuePair<string,double>>();
+        public int[] startCoord;
+        public int[] finishCoord;
+
 
 
         public Universe(int row, int col)
         {
             this.row = row;
             this.col = col;
-            elements.Add(new KeyValuePair<string, double>("astroid", 0.1));
-            elements.Add(new KeyValuePair<string, double>("gravity", 0.1));
-            elements.Add(new KeyValuePair<string, double>("space", 0.8));
+            startCoord = generateRandomStartFinishPoint();
+            finishCoord = generateRandomStartFinishPoint();
+            elements.Add(new KeyValuePair<string, double>("astroid", 0.05));
+            elements.Add(new KeyValuePair<string, double>("gravity", 0.05));
+            elements.Add(new KeyValuePair<string, double>("space", 0.9));
         }
 
         public Universe()
         {
-            elements.Add(new KeyValuePair<string, double>("astroid", 0.1));
-            elements.Add(new KeyValuePair<string, double>("gravity", 0.1));
-            elements.Add(new KeyValuePair<string, double>("space", 0.8));
+            startCoord = generateRandomStartFinishPoint();
+            finishCoord = generateRandomStartFinishPoint();
+            elements.Add(new KeyValuePair<string, double>("astroid", 0.05));
+            elements.Add(new KeyValuePair<string, double>("gravity", 0.05));
+            elements.Add(new KeyValuePair<string, double>("space", 0.9));
         }
 
         public void drawMatrix()
@@ -72,6 +79,17 @@ namespace Space_Probe
                 }
             }
             return "Error";
+        }
+
+        public int[] generateRandomStartFinishPoint()
+        {
+            startCoord = new int[2];
+            finishCoord = new int[2];
+            int[] container = new int[2];
+            container[0] = random.Next(0, col); //Xcoord
+            container[1] = random.Next(0, row);//Ycoord
+
+            return container;
         }
     }
 }
